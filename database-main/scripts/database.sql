@@ -36,20 +36,20 @@ CREATE TABLE atividade (
 	data DATE,
 );
 
-CREATE TABLE Aluno_Atividade (
+CREATE TABLE aluno_atividade (
 	papel VARCHAR(200),
 	fk_Atividade_id INT,
 	fk_Aluno_id INT,
 	PRIMARY KEY (fk_Atividade_id, fk_Aluno_id)
 );
 
-CREATE TABLE Professor (
+CREATE TABLE professor (
 	nome VARCHAR(500),
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	descricao VARCHAR(500)
 );
 
-CREATE TABLE Professor_Atividade (
+CREATE TABLE professor_atividade (
 	fk_Professor_id INT,
 	fk_Atividade_id INT,
 	PRIMARY KEY (fk_Professor_id, fk_Atividade_id)
