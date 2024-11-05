@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Montserrat:wght@100&family=Onest:wght@100&family=Poppins:wght@100&family=Ubuntu:wght@300&display=swap');
+
+body{
+    font-family: 'Gabarito', cursive;
+    text-align: justify;
+}
+
+.container{
+    padding: 5% 2% 1% 2%;
+}
+
+.linha{
+    width:100%;
+}

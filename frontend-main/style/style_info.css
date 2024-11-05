@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Montserrat:wght@100&family=Onest:wght@100&family=Poppins:wght@100&family=Ubuntu:wght@300&display=swap');
+
+body{
+    font-family: 'Gabarito', cursive;
+}
+
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-img-top {
+    object-fit: contain;
+    padding: 5% 0 5% 5%;
+}
+
+.card-text{
+    text-align: justify;
+    padding: 0 3% 0 3%;
+}
+
+h5{
+    text-align: center;
+}
+
+.card{
+    border: 2px;
+    border-color:#0d6efd;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243); 
+}
+
+.row{
+    text-align: center;
+}
+
+i{
+    padding-bottom: 20px;
+}
+
+a{
+    text-decoration: none;
+    color:black;
+}
