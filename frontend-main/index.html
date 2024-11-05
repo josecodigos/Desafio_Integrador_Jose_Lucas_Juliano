@@ -1,145 +1,69 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página Inicial</title>
-    <script src="scripts/index.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="style/style.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
+    <meta charset="utf-8">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary fixed-top" data-bs-theme="dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Memorial</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Sobre
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#campo">Campo Real</a></li>
-                            <li><a class="dropdown-item" href="#curso">Curso</a></li>
-                            <li><a class="dropdown-item" href="#site">Site</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Cadastros
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Pessoas</a></li>
-                            <li><a class="dropdown-item" href="#">Projetos/Trabalhos
-                                </a></li>
-                            <li><a class="dropdown-item" href="#">Avaliação de curso</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <form id="myForm" name="myForm">
+        <fieldset>
+            <legend>Pessoa</legend>
 
-    <main>
-        <div id="campo">
-            <div class="container">
-                <h3>HISTÓRICO</h3>
-                <p>A história da Campo Real vem sendo construída há 20 anos, desde a implantação da Faculdade de
-                    Direito, em outubro de 2000. Ao longo desses anos, a qualidade dos serviços educacionais prestados,
-                    com os primeiros cursos, passando pela inclusão de novas graduações, permitiu a formação de milhares
-                    de profissionais de diversas áreas de atuação, que hoje ocupam lugares de destaque no mercado de
-                    trabalho.</p>
-                <h3>MISSÃO</h3>
-                <p>Formar pela excelência no Ensino, Iniciação à Pesquisa e Extensão profissionais com sólidos
-                    princípios éticos e valores humanos, com espírito inovador que atendam às demandas das comunidades
-                    locais e aos desafios globais.</p>
-                <h3>VISÃO</h3>
-                <p>Ser reconhecida como uma Instituição de Ensino Superior de referência regional e nacional pela/o:
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome"> <br><br>
 
-                <ul>
-                    <li> Qualidade e compromisso do corpo docente;</li>
+            <label for="curso">Curso:</label>
+            <input type="curso" id="curso" name="curso"> <br><br>
 
-                    <li> Qualidade da oferta do ensino presencial;</li>
+            <label for="periodo">Período:</label>
+            <input type="periodo" id="periodo" name="periodo"> <br><br>
 
-                    <li> Bem-estar e satisfação da comunidade interna;</li>
+            <input id="postSubmit" type="submit" value="Salvar">
 
-                    <li> Qualidade da gestão acadêmica e administrativa;</li>
+        </fieldset>
+    </form>
 
-                    <li> Promoção e apoio às atividades de iniciação científica e de iniciação à pesquisa;</li>
+    <table data-js = "idTabela">
+        <tr>
+            <th>Nome:</th>
+            <th>Curso:</th>
+            <th>Período:</th>
+        </tr>
+    </table>
 
-                    <li> Compromisso social de inclusão;</li>
+    <script>
+        const thisForm = document.getElementById('myForm');
+        thisForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formData = new FormData(thisForm).entries()
+            const response = await fetch('http://localhost:5000/alunos', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(formData))
+            });
 
-                    <li> Processos de cooperação e parceria com o mundo do trabalho;</li>
+            const result = await response.json();
+            console.log(result)
+            carregarLista()
+        });
 
-                    <li> Compromisso e relacionamento permanente com os egressos, incentivando a educação continuada;
-                    </li>
-
-                    <li>
-                         Promoção da extensão aberta à participação da população, com vistas à difusão das conquistas e
-                        benefícios da criança cultural, da pesquisa científica e tecnológicas realizadas na Instituição;
-                    </li>
-
-                    <li> Desenvolvimento de políticas de educação ambiental;</li>
-
-                    <li>
-                         Respeito dos valores éticos, étnico raciais e promoção de condições de acesso para pessoas com
-                        deficiência e/ou mobilidade reduzida, promovendo a acessibilidade física e pedagógica;
-                    </li>
-
-                    <li>
-                         Educação para convivência baseada na tolerância, no respeito mútuo, na dignidade humana, na
-                        ética,
-                        na igualdade de direitos, na ausência de preconceitos, na educação de Direito Humanos.</p>
-                    </li>
-                </ul>
-                <h6>Referência</h6>
-                <p>https://irati.camporeal.edu.br/historico/ <br></p>
-            </div>
-        </div>
-
-        <div id="curso">
-            <div class="container3">
-                <h3>ENGENHARIA DE SOFTWARE</h3>
-                <p>O curso de Engenharia de Software é voltado ao desenvolvimento de produtos de software, formando
-                    profissionais preparados para aplicar diversas técnicas e práticas de desenvolvimento de softwares e
-                    programas computacionais para uma ampla gama de aplicações, utilizando de tecnologias modernas,
-                    eficientes, seguras e confiáveis.</p>
-                <h5>POR QUE FAZER?</h5>
-                <p>O Brasil é o oitavo país no ranking mundial de desenvolvedores, fabricantes e distribuidores de
-                    softwares, movimentando cerca de 27 bilhões de dólares apenas com o mercado interno.
-                    Esse cenário mantém o setor aquecido para os engenheiros. O uso massivo de celulares e tablets pela
-                    população brasileira também eleva a busca por profissionais aptos a lidar com esses sistemas.</p>
-                <h6>Referência</h6>
-                <p>https://irati.camporeal.edu.br/cursos-smart/engenharia-de-software/</p>
-            </div>
-        </div>
-
-        <div id="site">
-            <div class="container3">
-                <h3>MEMORIAL CAMPO REAL</h3>
-                <p>O projeto consiste em um memorial básico com o objetivo de mostrar algumas informações simples sobre os alunos do curso de Engenharia de Software, fazendo uma brincadeira como se fossem personagens de um jogo com suas informações básicas em uma carta com foto e alguns detalhes. <br>
-                    A ideia do projeto surgiu pensando em uma tela de "Seleção de personagens" (como utilizado no site do GTA, por exemplo), e pensando que seria uma ideia interessante para a turma, como uma forma de guardar recordações.
-                    O projeto também foi uma maneira de testar as funcionalidades das ferramentas, como o Bootstrap e Jquerry, e demonstrar os conteúdos aprendidos em Programação Web.</p>
-            </div>
-        </div>
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
+        const carregarLista = () => {
+            fetch('http://localhost:5000/alunos')
+            .then(data =>  data.json())
+            .then(data => {
+                console.log(data)
+                const html = data.pessoa.reduce((acumulador, item) => {
+                    acumulador +=`<tr> <td>${item.nome}</td> <td>${item.curso}</td> <td>${item.periodo}</td> </tr>`
+                    return acumulador
+                }, '')
+                const table = document.querySelector('[data-js = "idTabela"]')
+                table.innerHTML = html
+            })
+            .catch(err => console.log(err))
+        }
+        carregarLista()
+    </script>
 </body>
 
 </html>
