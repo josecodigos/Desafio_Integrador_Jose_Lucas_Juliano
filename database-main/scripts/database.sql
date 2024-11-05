@@ -13,6 +13,7 @@ CREATE TABLE aluno (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	email VARCHAR(200),
 	data_nascimento DATE,
+	usuarioGitHub VARCHAR(100)
 	descricao VARCHAR(2000)
 );
 
