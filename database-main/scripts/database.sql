@@ -33,7 +33,7 @@ CREATE TABLE atividade (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	titulo VARCHAR(200),
 	descricao VARCHAR(500),
-	data DATE,
+	data DATE
 );
 
 CREATE TABLE aluno_atividade (
