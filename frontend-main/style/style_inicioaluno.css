@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Montserrat:wght@100&family=Onest:wght@100&family=Poppins:wght@100&family=Ubuntu:wght@300&display=swap');
+
+body{
+    font-family: 'Gabarito', cursive;
+    text-align: justify;
+}
+.navbar-brand{
+    color: white;
+}
+.nav-link{
+    color: rgb(255 255 255 / 55%);
+}
+
+.cardPessoa {
+    justify-content: left;
+    flex-direction: row;
+    display: flex;
+}
+
+.img-pessoa {
+    max-width: 50%;
+}
+
+.container{
+    margin-top: 5%;
+    margin-left: 8.7%;
+    margin-right: 8.7%;
+}
+
+.container3{
+    margin-top: 0;
+    margin-left: 8.5%;
+    margin-right: 8.7%;
+}
+form{
+    
+    
+    border: 2px;
+    border-color:#0d6efd;
+    border-style: solid;
+    border-radius: 10px;
+    background-color: rgb(243, 243, 243);
+    
+    
+}
+
+
+a{
+    color: black;
+    text-decoration:none;
+    
+}
+#botaofiltragem{
+    font-size: small;
+    
+   
+}
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Centraliza o botão verticalmente */
+}
+
+#loginButton {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: white;
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#loginButton:hover {
+    background-color: #0a58ca;
+}
+
+.button-container button {
+    width: 50%; /* Define a largura dos botões */
+    margin-top: 10px;
+}
+
