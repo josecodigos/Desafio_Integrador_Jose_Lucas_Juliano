@@ -1,12 +1,49 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito&family=Montserrat:wght@100&family=Onest:wght@100&family=Poppins:wght@100&family=Ubuntu:wght@300&display=swap');
 
-body{
-    font-family: 'Gabarito', cursive;
-    text-align: justify;
+/* Centraliza os botões dentro do container */
+.mb-3 {
+    display: flex; /* Transforma o contêiner em um flexbox */
+    justify-content: center; /* Centraliza os botões horizontalmente */
+    gap: 10px; /* Adiciona um espaçamento entre os botões */
 }
 
-.container{
-    padding: 5% 2% 1% 2%;
+/* Ajuste para garantir que os botões tenham o mesmo tamanho e estilo */
+.btn {
+    min-width: 150px; /* Define uma largura mínima para os botões */
+}
+
+/* Adiciona um pouco de espaço ao redor do formulário */
+.form-cad-pessoas {
+    padding: 20px; /* Aumenta o padding para dar mais espaçamento */
+}
+
+/* Estilização para o campo de tabela */
+table, td, th {
+    border: 1px solid #ddd; /* Cor de borda mais suave */
+    padding: 10px; /* Mais espaçamento dentro das células */
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+/* Alinha os títulos do formulário no centro */
+legend {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Ajustes de fonte e formatação geral */
+body {
+    font-family: 'Gabarito', cursive; /* Fonte personalizada */
+    text-align: justify;
+    margin: 0;
+    padding: 0;
+}
+
+/* Se necessário, você pode ajustar os botões para que fiquem maiores ou mais visíveis */
+.btn-primary {
+    padding: 10px 20px; /* Ajusta o padding para tornar o botão maior */
+    font-size: 1rem; /* Ajusta o tamanho da fonte */
+    border-radius: 8px; /* Adiciona borda arredondada aos botões */
 }
 
 .linha{
