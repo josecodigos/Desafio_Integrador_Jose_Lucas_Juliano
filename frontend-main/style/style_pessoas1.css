@@ -49,10 +49,7 @@ body {
 .linha{
     width:100%;
 }
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
+
 
   .icones1 button {
     width: 10px; /* Largura personalizada */
@@ -65,3 +62,8 @@ table, th, td {
  .icones1{
     text-align: center;
   }
+  
+  .button-container button {
+    width: 50%; /* Define a largura dos botões */
+    margin-top: 10px;
+}
