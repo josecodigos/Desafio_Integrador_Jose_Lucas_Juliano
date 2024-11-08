@@ -4,16 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem</title>
-    <script src="../scripts/jquery.js"></script>
-    <link href="../DataTables/datatables.min.css" rel="stylesheet">
-    <link href="../style/style.css" rel="stylesheet">
-    <script src="../DataTables/datatables.min.js"></script>
+    <title>Página Inicial</title>
+    <script src="scripts/index.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-
-    <script src="../scripts/script_listagem.js"></script>
-
+    <link rel="stylesheet" href="../style/style_inicioaluno.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
 </head>
 
 <body>
@@ -38,22 +34,29 @@
                             <li><a class="dropdown-item" href="#site">Site</a></li>
                         </ul>
                     </li>
-                    
                 </ul>
             </div>
         </div>
     </nav>
+
     <main>
-        <div id="tabela">
-            <div class="container">
-                <table id="dataTable" style="width:100%">
-
-                </table>
+        <div class="row align-items-center justify-content-center my-5">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <fieldset class="d-flex flex-column align-items-center bg-light p-4 rounded shadow">
+                    <legend class="text-center">Administrador</legend>
+                    <form class="form-cad-pessoas form-control bg-light" action="">
+                        <div class="button-container d-flex flex-column align-items-center">
+                            <button type="button" class="btn btn-primary my-1">Adicionar Professor</button>
+                            <button type="button" class="btn btn-secondary my-1">Adicionar Curso</button>
+                        </div>
+                    </form>
+                </fieldset>
             </div>
+            <div class="col-md-3"></div>
         </div>
-
+        
     </main>
-
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>

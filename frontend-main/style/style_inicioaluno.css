@@ -77,3 +77,8 @@ a{
     background-color: #0a58ca;
 }
 
+.button-container button {
+    width: 50%; /* Define a largura dos botões */
+    margin-top: 10px;
+}
+
