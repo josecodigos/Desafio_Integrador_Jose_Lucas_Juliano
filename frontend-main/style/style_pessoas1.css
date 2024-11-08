@@ -51,13 +51,13 @@ body {
 }
 
 
-  .icones1 button {
-    width: 10px; /* Largura personalizada */
-    height: 30px; /* Altura personalizada */
-    font-size: 0.9rem; /* Tamanho da fonte */
-    border-radius: 5px; /* Borda arredondada */
+.icones1 button {
+    width: 100%; /* Ajusta a largura para preencher a célula */
+    height: 40px; /* Define uma altura consistente */
+    font-size: 0.9rem;
+    border-radius: 5px;
+    text-align: center; /* Centraliza o texto no botão */
 }
-
 
  .icones1{
     text-align: center;
@@ -67,3 +67,4 @@ body {
     width: 50%; /* Define a largura dos botões */
     margin-top: 10px;
 }
+
