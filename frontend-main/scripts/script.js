@@ -114,5 +114,4 @@ $('.datepicker').pickadate({
    interval
 */
 //picker.set(parameter);
-
 });

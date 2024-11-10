@@ -122,6 +122,21 @@ app.get('/aluno', (req, res) => {
     })
 })
 
+//ALUNO GET POR ID
+app.get('/aluno/:id', (req, res) => {
+    const sql = `SELECT * FROM aluno WHERE id = ${req.params.id}`
+    conexao.promise().query(sql)
+    .then (data => {
+        res.status(200)
+        .json({ pessoa: data[0]
+        })
+    }) 
+    .catch (err => {
+        res.status(500)
+        .json({mesage: "Erro ao buscar aluno: " + err})
+    })
+})
+
 //PROFESSOR GET
 app.get('/professor', (req, res) => {
     const sql = `SELECT * FROM professor `
