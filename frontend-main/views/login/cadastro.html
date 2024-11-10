@@ -59,28 +59,28 @@
                 <input type="text" id="nome" name="nome" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="nome" class="form-label">Senha:</label>
-                <input type="text" id="nome" name="nome" class="form-control">
+                <label for="senha" class="form-label">Senha:</label>
+                <input type="text" id="senha" name="senha" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" id="email" name="email" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="date" class="form-label">Data de nascimento:</label>
-                <input id="exampleDate" class="datepicker form-control" name="date" type="text"/>
+                <label for="data_nascimento" class="form-label">Data de nascimento:</label>
+                <input id="data_nascimento" name="data_nascimento" type="date">
             </div>
             <div class="mb-3">
-                <label for="git" class="form-label">Usuário do GitHub:</label>
-                <input type="text" id="git" name="git" class="form-control">
+                <label for="usuarioGitHub" class="form-label">Usuário do GitHub:</label>
+                <input type="text" id="usuarioGitHub" name="usuarioGitHub" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
                 <textarea id="descricao" cols="30" rows="10" name="descricao" class="form-control"></textarea>
             </div>
             <div class="mb-3">
-                <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
-                <button type="button" class="btn btn-primary btn-cancelar" onclick="window.location.href='../index.html'">Cancelar</button>
+                <input id="postSubmit" class="btn btn-primary btn-salvar" type="submit" value="Salvar">
+                <button type="button" class="btn btn-primary btn-cancelar" onclick="window.location.href='/frontend-main/views/index.html'">Cancelar</button>
             </div>
         </form>
     </fieldset>
@@ -90,20 +90,26 @@
 
 <script>
     const form = document.getElementById('AlunoForm');
+
     form.addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const formData = new FormData(form).entries()
-        console.log(formData)
-        const response = await fetch('http://localhost:5000/aluno', {
-            method: 'POST',
-            headers: { 'Content_Type': 'application/json'},
-            body: JSON.stringify(Object.fromEntries(formData))
-        })
-    console.log(response);
+
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const formDataObject = Object.fromEntries(formData.entries());  
+
+    console.log(formDataObject);
+
+    const response = await fetch('http://localhost:5000/aluno', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },  
+        body: JSON.stringify(formDataObject)
+    });
 
     const result = await response.json();
-    console.log(result)
-    });
+    console.log(result);
+});
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

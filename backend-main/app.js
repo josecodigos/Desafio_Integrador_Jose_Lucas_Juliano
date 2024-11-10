@@ -18,10 +18,10 @@ const conexao = mysql.createPool({
 // ALUNOS POST
 app.post('/aluno', (req, res) => {
     console.log("chegou aqui aluno");
-    const sql = `CALL adicionar_aluno VALUES (?, ?, ?, ?, ?, ?)`;
-    const params = [req.body.nome, req.body.email, req.body.data_nascimento, req.body.usuarioGitHub, req.body.descricao, req.body.senha];
+    console.log(req.body);
+    const sql = `CALL adicionar_aluno ("${req.body.nome}", "${req.body.email}", "${req.body.data_nascimento}", "${req.body.usuarioGitHub}", "${req.body.descricao}", "${req.body.senha}")`;
     
-    conexao.promise().query(sql, params)
+    conexao.promise().query(sql)
         .then(data => res.status(200).json({ message: "Aluno e login inseridos com sucesso", pessoa: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao inserir aluno: " + err }));
 });
