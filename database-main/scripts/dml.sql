@@ -78,7 +78,7 @@ CREATE PROCEDURE adicionar_aluno (
 
 	SET @idAluno = LAST_INSERT_ID();
 
-	INSERT INTO login(id_aluno, senha)
+	INSERT INTO login(usuario, senha)
 	VALUES(@idAluno, senha);
 
 	END $$
