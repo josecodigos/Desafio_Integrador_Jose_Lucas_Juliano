@@ -94,12 +94,12 @@ app.get('/matricula', (req, res) => {
     conexao.promise().query(sql)
     .then (data => {
         res.status(200)
-        .json({ pessoa: data[0]
+        .json({ element: data[0]
         })
     }) 
     .catch (err => {
         res.status(500)
-        .json({mesage: "Erro ao buscar matricula: " + err})
+        .json({message: "Erro ao buscar matricula: " + err})
     })
 })
 
@@ -109,12 +109,12 @@ app.get('/curso', (req, res) => {
     conexao.promise().query(sql)
     .then (data => {
         res.status(200)
-        .json({ pessoa: data[0]
+        .json({ element: data[0]
         })
     }) 
     .catch (err => {
         res.status(500)
-        .json({mesage: "Erro ao buscar curso: " + err})
+        .json({message: "Erro ao buscar curso: " + err})
     })
 })
 
@@ -124,12 +124,12 @@ app.get('/aluno', (req, res) => {
     conexao.promise().query(sql)
     .then (data => {
         res.status(200)
-        .json({ pessoa: data[0]
+        .json({ element: data[0]
         })
     }) 
     .catch (err => {
         res.status(500)
-        .json({mesage: "Erro ao buscar aluno: " + err})
+        .json({message: "Erro ao buscar aluno: " + err})
     })
 })
 
@@ -139,12 +139,12 @@ app.get('/professor', (req, res) => {
     conexao.promise().query(sql)
     .then (data => {
         res.status(200)
-        .json({ pessoa: data[0]
+        .json({ element: data[0]
         })
     }) 
     .catch (err => {
         res.status(500)
-        .json({mesage: "Erro ao buscar aluno: " + err})
+        .json({message: "Erro ao buscar aluno: " + err})
     })
 })
 
@@ -154,12 +154,12 @@ app.get('/atividade', (req, res) => {
     conexao.promise().query(sql)
     .then (data => {
         res.status(200)
-        .json({ pessoa: data[0]
+        .json({ element: data[0]
         })
     }) 
     .catch (err => {
         res.status(500)
-        .json({mesage: "Erro ao buscar atividade: " + err})
+        .json({message: "Erro ao buscar atividade: " + err})
     })
 })
 
@@ -169,12 +169,12 @@ app.get('/login', (req, res) => {
     conexao.promise().query(sql)
     .then (data => {
         res.status(200)
-        .json({ pessoa: data[0]
+        .json({ element: data[0]
         })
     }) 
     .catch (err => {
         res.status(500)
-        .json({mesage: "Erro ao buscar login: " + err})
+        .json({message: "Erro ao buscar login: " + err})
     })
 })
 
@@ -189,7 +189,7 @@ app.get('/professor/:id/atividades', (req, res) => {
     `;
     conexao.promise().query(sql, [professorId])
     .then(data => {
-        res.status(200).json({ atividades: data[0] });
+        res.status(200).json({ element: data[0] });
     })
     .catch(err => {
         res.status(500).json({ message: "Erro ao buscar atividades do professor: " + err });
@@ -211,7 +211,7 @@ app.get('/atividade/:id/participantes', (req, res) => {
     `;
     conexao.promise().query(sql, [atividadeId, atividadeId])
     .then(data => {
-        res.status(200).json({ participantes: data[0] });
+        res.status(200).json({ element: data[0] });
     })
     .catch(err => {
         res.status(500).json({ message: "Erro ao buscar participantes da atividade: " + err });
@@ -227,7 +227,7 @@ app.get('/cursos/quantidade-alunos', (req, res) => {
     `;
     conexao.promise().query(sql)
     .then(data => {
-        res.status(200).json({ cursos: data[0] });
+        res.status(200).json({ element: data[0] });
     })
     .catch(err => {
         res.status(500).json({ message: "Erro ao buscar quantidade de alunos nos cursos: " + err });
@@ -244,7 +244,7 @@ app.get('/curso/:id/alunos', (req, res) => {
     `;
 
     conexao.promise().query(sql, [cursoId])
-        .then(data => res.status(200).json({ alunos: data[0] }))
+        .then(data => res.status(200).json({ element: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao buscar alunos do curso: " + err }));
 });
 
@@ -258,7 +258,7 @@ app.get('/aluno/:id/atividades', (req, res) => {
     `;
 
     conexao.promise().query(sql, [alunoId])
-        .then(data => res.status(200).json({ atividades: data[0] }))
+        .then(data => res.status(200).json({ element: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao buscar atividades do aluno: " + err }));
 });
 
