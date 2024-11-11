@@ -224,7 +224,7 @@ app.get('/atividade/:id/participantes', (req, res) => {
 
 app.get('/cursos/quantidade-alunos', (req, res) => {
     const sql = `
-        SELECT curso.nome, COUNT(matricula.fk_Aluno_id) AS quantidade_alunos
+        SELECT curso.nome, curso.total_periodo COUNT(matricula.fk_Aluno_id) AS quantidade_alunos
         FROM curso
         LEFT JOIN matricula ON curso.id = matricula.fk_Curso_id
         GROUP BY curso.id
