@@ -72,18 +72,15 @@ CREATE PROCEDURE adicionar_aluno (
 	IN descricao VARCHAR(2000),
 	IN senha VARCHAR(100))
 	BEGIN
+
 	INSERT INTO aluno(nome, email, data_nascimento, usuarioGitHub, descricao)
 	VALUES(nome, email, dataNascimento, usuarioGitHub, descricao);
 
 	SET @idAluno = LAST_INSERT_ID();
 
-	INSERT INTO login(usuario, senha)
+	INSERT INTO login(id_aluno, senha)
 	VALUES(@idAluno, senha);
 
-	SET @idLogin = LAST_INSERT_ID();
-
-	INSERT INTO aluno_login(fk_Aluno_id, fk_Login_id)
-	VALUES(@idAluno, @idLogin);
 	END $$
 
 DELIMITER ;

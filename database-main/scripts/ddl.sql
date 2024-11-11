@@ -17,12 +17,6 @@ CREATE TABLE aluno (
 	descricao VARCHAR(2000)
 );
 
-CREATE TABLE aluno_login (
-	fk_Aluno_id INT,
-	fk_Login_id INT,
-	PRIMARY KEY (fk_Aluno_id, fk_Curso_id)
-);
-
 CREATE TABLE curso (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	total_periodos INT,

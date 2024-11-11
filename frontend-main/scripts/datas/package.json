@@ -36,7 +36,7 @@
     "test": "npx grunt test --verbose"
   },
   "dependencies": {
-    "jquery": ">=1.7",
+    "jquery": ">1.7",
     "pickadate": "file:"
   },
   "devDependencies": {
