@@ -3,14 +3,14 @@ CREATE DATABASE memorial;
 USE memorial;
 
 CREATE TABLE login (
-	usuario VARCHAR(100) NOT NULL,
+	id_aluno VARCHAR(100) NOT NULL,
 	senha VARCHAR(100) NOT NULL,
 	id INT PRIMARY KEY AUTO_INCREMENT
 );
 
 CREATE TABLE aluno (
-	nome VARCHAR(500) NOT NULL,
 	id INT PRIMARY KEY AUTO_INCREMENT,
+	nome VARCHAR(500) NOT NULL,
 	email VARCHAR(200),
 	data_nascimento DATE,
 	usuarioGitHub VARCHAR(100)

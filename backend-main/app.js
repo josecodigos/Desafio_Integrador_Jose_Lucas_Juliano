@@ -18,11 +18,11 @@ const conexao = mysql.createPool({
 // ALUNOS POST
 app.post('/aluno', (req, res) => {
     console.log("chegou aqui aluno");
-    const sql = `INSERT INTO aluno (nome, email, data_nascimento, descricao) VALUES (?, ?, ?, ?)`;
-    const params = [req.body.nome, req.body.email, req.body.data_nascimento, req.body.descricao];
+    console.log(req.body);
+    const sql = `CALL adicionar_aluno ("${req.body.nome}", "${req.body.email}", "${req.body.data_nascimento}", "${req.body.usuarioGitHub}", "${req.body.descricao}", "${req.body.senha}")`;
     
-    conexao.promise().query(sql, params)
-        .then(data => res.status(200).json({ message: "Aluno inserido com sucesso", pessoa: data[0] }))
+    conexao.promise().query(sql)
+        .then(data => res.status(200).json({ message: "Aluno e login inseridos com sucesso", pessoa: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao inserir aluno: " + err }));
 });
 
@@ -53,17 +53,6 @@ app.post('/atividade', (req, res) => {
     conexao.promise().query(sql, params)
         .then(data => res.status(200).json({ message: "Atividade inserida com sucesso", pessoa: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao inserir atividade: " + err }));
-});
-
-// LOGIN POST
-app.post('/login', (req, res) => {
-    console.log("chegou aqui login");
-    const sql = `INSERT INTO login (usuario, senha) VALUES (?, ?)`;
-    const params = [req.body.usuario, req.body.senha];
-
-    conexao.promise().query(sql, params)
-        .then(data => res.status(200).json({ message: "Login inserido com sucesso", pessoa: data[0] }))
-        .catch(err => res.status(500).json({ message: "Erro ao inserir login: " + err }));
 });
 
 // CURSO POST
@@ -130,6 +119,21 @@ app.get('/aluno', (req, res) => {
     .catch (err => {
         res.status(500)
         .json({message: "Erro ao buscar aluno: " + err})
+    })
+})
+
+//ALUNO GET POR ID
+app.get('/aluno/:id', (req, res) => {
+    const sql = `SELECT * FROM aluno WHERE id = ${req.params.id}`
+    conexao.promise().query(sql)
+    .then (data => {
+        res.status(200)
+        .json({ pessoa: data[0]
+        })
+    }) 
+    .catch (err => {
+        res.status(500)
+        .json({mesage: "Erro ao buscar aluno: " + err})
     })
 })
 

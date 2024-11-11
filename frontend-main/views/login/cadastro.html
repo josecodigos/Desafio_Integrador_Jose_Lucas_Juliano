@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil</title>
+    <title>Cadastro</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style/style_pessoas.css">
+    <link rel="stylesheet" href="/frontend-main/style/style_pessoas.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="../scripts/script_pessoas.js"></script>
+    <script src="/frontend-main/scripts/script.js"></script>
 <!-- Core -->
-<script src="../scripts/datas/lib/picker.js"></script>
+    <script src="/frontend-main/scripts/datas/lib/picker.js"></script>
 <!-- Date Picker -->
-<script src="../scripts/datas/lib/picker.date.js"></script>
+    <script src="/frontend-main/scripts/datas/lib/picker.date.js"></script>
 <!-- Language -->
-<script src="../scripts/datas/lib/translations/pt_BR.js"></script>
+    <script src="/frontend-main/scripts/datas/lib/translations/pt_BR.js"></script>
 <!-- Required For Legacy Browsers (IE 8-) -->
-<script src="../scripts/datas/lib/legacy.js"></script>
+    <script src="/frontend-main/scripts/datas/lib/legacy.js"></script>
 <!-- Escolher tema para input -->
-<link rel="stylesheet" href="../scripts/datas/lib/themes/default.css">
-<link rel="stylesheet" href="../scripts/datas/lib/themes/default.date.css">
-<link href="https://releases.transloadit.com/uppy/v3.18.1/uppy.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/frontend-main/scripts/datas/lib/themes/default.css">
+    <link rel="stylesheet" href="/frontend-main/scripts/datas/lib/themes/default.date.css">
+    <link href="https://releases.transloadit.com/uppy/v3.18.1/uppy.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -53,40 +53,65 @@
         <div class="col-md-3"></div>
         <fieldset class="col-md-6">
             <legend style="text-align: center;">Cadastro</legend>
-        <form class="form-cad-pessoas form-control bg-light" action="">
+        <form class="form-cad-pessoas form-control bg-light" id="AlunoForm" name="AlunoForm">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome:</label>
                 <input type="text" id="nome" name="nome" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="nome" class="form-label">Senha:</label>
-                <input type="text" id="nome" name="nome" class="form-control">
+                <label for="senha" class="form-label">Senha:</label>
+                <input type="text" id="senha" name="senha" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
                 <input type="email" id="email" name="email" class="form-control">
             </div>
             <div class="mb-3">
-                <label for="date" class="form-label">Data de nascimento:</label>
-                <input id="exampleDate" class="datepicker form-control" name="date" type="text"/>
+                <label for="data_nascimento" class="form-label">Data de nascimento:</label>
+                <input id="data_nascimento" name="data_nascimento" type="date">
             </div>
             <div class="mb-3">
-                <label for="git" class="form-label">Usuário do GitHub:</label>
-                <input type="text" id="git" name="git" class="form-control">
+                <label for="usuarioGitHub" class="form-label">Usuário do GitHub:</label>
+                <input type="text" id="usuarioGitHub" name="usuarioGitHub" class="form-control">
             </div>
             <div class="mb-3">
                 <label for="descricao" class="form-label">Descrição:</label>
                 <textarea id="descricao" cols="30" rows="10" name="descricao" class="form-control"></textarea>
             </div>
             <div class="mb-3">
-                <button type="button" class="btn btn-primary btn-salvar">Salvar</button>
-                <button type="button" class="btn btn-primary btn-cancelar">Cancelar</button>
+                <input id="postSubmit" class="btn btn-primary btn-salvar" type="submit" value="Salvar">
+                <button type="button" class="btn btn-primary btn-cancelar" onclick="window.location.href='/frontend-main/views/index.html'">Cancelar</button>
             </div>
         </form>
     </fieldset>
     <div class="col-3"></div>
     </div>
 <br>
+
+<script>
+    const form = document.getElementById('AlunoForm');
+
+    form.addEventListener('submit', async function (e) {
+
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const formDataObject = Object.fromEntries(formData.entries());  
+
+    console.log(formDataObject);
+
+    const response = await fetch('http://localhost:5000/aluno', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },  
+        body: JSON.stringify(formDataObject)
+    });
+
+    const result = await response.json();
+    console.log(result);
+});
+
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 
