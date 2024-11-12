@@ -54,6 +54,9 @@
         <fieldset class="col-md-6">
             <legend style="text-align: center;">Atividades</legend>
         <form class="form-cad-pessoas form-control bg-light" action="">
+            <label for="curso" class="form-label">Aluno:</label>
+                        <select id="pegaAluno" data-js="idPegaAluno">                          
+                        </select>
             <table width="100%">
             <tr>
                 <th>Título</th>
@@ -87,6 +90,88 @@
     <div class="col-3"></div>
     </div>
 <br>
+
+<script>
+    document.getElementById('formAdicionarAtividade').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        // Captura os dados do formulário
+        const titulo = document.getElementById('titulo').value;
+        const data = document.getElementById('data').value;
+        const descricao = document.getElementById('descricao').value;
+
+        // Configura o objeto para enviar
+        const atividade = {
+            titulo,
+            data,
+            descricao
+        };
+
+        // Envia o POST para a API
+        fetch('http://localhost:5000/aluno/1/atividades', { // Substitua 1 pelo ID real do aluno
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(atividade)
+        })
+        .then(response => {
+            if (response.ok) {
+                alert("Atividade adicionada com sucesso!");
+                this.reset(); // Limpa o formulário após o envio
+            } else {
+                throw new Error('Erro ao adicionar atividade');
+            }
+        })
+        .catch(error => console.error("Erro:", error));
+    });
+
+
+    const carregarAtividadesAluno = (alunoId) => {
+        fetch(`http://localhost:5000/aluno/${alunoId}/atividades`)
+            .then(response => response.json())
+            .then(data => {
+                const html = data.element.reduce((acumulador, item) => {
+                    acumulador += `
+                        <tr>
+                            <td>${item.titulo}</td>
+                            <td>${item.data}</td>
+                            <td>${item.descricao}</td>
+                            <td>${item.papel}</td>
+                            <td><button class="btn btn-secondary">Editar</button></td>
+                            <td><button class="btn btn-danger">Excluir</button></td>
+                        </tr>
+                    `;
+                    return acumulador;
+                }, '');
+
+                const tableBody = document.querySelector('#tabelaAtividades tbody');
+                tableBody.innerHTML = html;
+            })
+            .catch(err => console.log("Erro ao buscar atividades do aluno:", err));
+    }
+
+    carregarAtividadesAluno(document.getElementById(pegaAluno.value));
+
+    const carregarAluno = () => {
+        fetch(`http://localhost:5000/aluno`)
+            .then(response => response.json())
+            .then(data => {
+                const html = data.element.reduce((acumulador, item) => {
+                    acumulador += `
+                        <option value="${item.id}">${item.nome}</option>
+                    `;
+                    return acumulador;
+                }, '');
+
+                const tableBody = document.querySelector('[data-js= "idPegaAluno"]');
+                tableBody.innerHTML = html;
+            })
+            .catch(err => console.log("Erro ao buscar atividades do aluno:", err));
+    }
+
+    carregarAtividadesAluno(document.getElementById(pegaAluno.value));
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
 

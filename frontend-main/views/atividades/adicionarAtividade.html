@@ -102,6 +102,31 @@
         </fieldset>
         <div class="col-md-3"></div>
     </div>
+<script>
+    const carregarAtividadesAluno = (alunoId) => {
+        fetch(`http://localhost:5000/aluno/${alunoId}/atividades`)
+            .then(response => response.json())
+            .then(data => {
+                const html = data.element.reduce((acumulador, item) => {
+                    acumulador += `
+                        <tr>
+                            <td>${item.titulo}</td>
+                            <td>${item.data}</td>
+                            <td>${item.descricao}</td>
+                            <td>${item.papel}</td>
+                            <td><button class="btn btn-secondary">Editar</button></td>
+                            <td><button class="btn btn-danger">Excluir</button></td>
+                        </tr>
+                    `;
+                    return acumulador;
+                }, '');
+
+                const tableBody = document.querySelector('#tabelaAtividades tbody');
+                tableBody.innerHTML = html;
+            })
+            .catch(err => console.log("Erro ao buscar atividades do aluno:", err));
+    }
+</script>
 <br>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
