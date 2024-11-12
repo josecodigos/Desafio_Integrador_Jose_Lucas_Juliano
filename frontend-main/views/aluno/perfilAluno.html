@@ -54,6 +54,9 @@
         <fieldset class="col-md-6">
             <legend style="text-align: center;">Perfil</legend>
         <form class="form-cad-pessoas form-control bg-light" action="">
+            <label for="curso" class="form-label">Aluno:</label>
+            <select id="pegaAluno" data-js="idPegaAluno">                          
+            </select>
             <table width="100%">
             <tr>
                 <td>Nome:</td>
@@ -97,21 +100,28 @@
 <br>
 
 <script>
-    
-    console.log(alunoId);
-    fetch('http://localhost:5000/aluno/' + alunoId)
-        .then(response => response.json()) 
-        .then(data => {
-            document.getElementById('nome').value = data.nome;
-            document.getElementById('email').value = data.email;
-            document.getElementById('data_nascimento').value = data.data_nascimento;
-            document.getElementById('usuarioGitHub').value = data.usuarioGitHub;
-            document.getElementById('descricao').value = data.descricao;
-        })
-        .catch(error => {
-            console.error('Erro procurando id do aluno:', error);
-        });
+    const carregarDadosAluno = (alunoId) => {
+        fetch(`http://localhost:5000/aluno/${alunoId}`)
+            .then(response => response.json())
+            .then(data => {
+                const aluno = data.pessoa[0];
+                const html = `
+                    <tr><td><strong>Nome:</strong></td><td>${aluno.nome}</td></tr>
+                    <tr><td><strong>Email:</strong></td><td>${aluno.email}</td></tr>
+                    <tr><td><strong>Data de Nascimento:</strong></td><td>${aluno.data_nascimento}</td></tr>
+                    <tr><td><strong>Usuário do GitHub:</strong></td><td>${aluno.usuarioGitHub}</td></tr>
+                    <tr><td><strong>Descrição:</strong></td><td>${aluno.descricao}</td></tr>
+                `;
+                document.querySelector('#tabelaAluno tbody').innerHTML = html;
+            })
+            .catch(error => {
+                console.error('Erro ao buscar dados do aluno:', error);
+            });
+    }
 
+    // Chama a função passando o ID do aluno
+    const alunoId = 1; // Substitua pelo ID correto do aluno ou obtenha-o de outra forma
+    carregarDadosAluno(document.getElementById(pegaAluno.value));
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

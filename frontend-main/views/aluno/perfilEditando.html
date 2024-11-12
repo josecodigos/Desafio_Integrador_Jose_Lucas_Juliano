@@ -95,6 +95,24 @@
     </fieldset>
     <div class="col-3"></div>
     </div>
+
+    <script>
+        const alunoId = document.getElementById(pegaAluno.value);
+        fetch(`http://localhost:5000/aluno/${alunoId}`)
+            .then(response => response.json())
+            .then(data => {
+                const aluno = data.pessoa[0];
+                document.getElementById('nome').value = aluno.nome;
+                document.getElementById('email').value = aluno.email;
+                document.getElementById('data_nascimento').value = aluno.data_nascimento;
+                document.getElementById('usuarioGitHub').value = aluno.usuarioGitHub;
+                document.getElementById('descricao').value = aluno.descricao;
+            })
+            .catch(error => {
+                console.error('Erro ao buscar aluno:', error);
+            });
+    </script>
+    
 <br>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
