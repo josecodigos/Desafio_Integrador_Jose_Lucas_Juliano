@@ -118,8 +118,8 @@ class _AddAtividadeFormState extends State<AddAtividadeForm> {
           children: [
             TextFormField(
               controller: _tituloController,
-              decoration: InputDecoration(labelText: 'Nome'),
-              validator: (value) => value == null || value.isEmpty ? 'Por favor, insira o nome' : null,
+              decoration: InputDecoration(labelText: 'Título'),
+              validator: (value) => value == null || value.isEmpty ? 'Por favor, insira o título' : null,
             ),
             TextFormField(
               controller: _descricaoController,
@@ -128,7 +128,7 @@ class _AddAtividadeFormState extends State<AddAtividadeForm> {
             ),
             TextFormField(
               controller: _alunoController,
-              decoration: InputDecoration(labelText: ''),
+              decoration: InputDecoration(labelText: 'Id do aluno'),
               validator: (value) => value == null || value.isEmpty ? 'Por favor, insira o id do aluno' : null,
             ),
             TextFormField(
