@@ -21,8 +21,11 @@ app.post('/aluno', (req, res) => {
     const sql = `CALL adicionar_aluno ("${req.body.nome}", "${req.body.email}", "${req.body.data_nascimento}", "${req.body.usuarioGitHub}", "${req.body.descricao}", "${req.body.senha}")`;
     
     conexao.promise().query(sql)
-        .then(data => res.status(200).json({ message: "Aluno e login inseridos com sucesso", pessoa: data[0] }))
-        .catch(err => res.status(500).json({ message: "Erro ao inserir aluno: " + err }));
+        .then(data => res.status(200).json({ 
+            message: "Aluno e login inseridos com sucesso", 
+            element: data[0] }))
+        .catch(err => res.status(500).json({ 
+            message: "Erro ao inserir aluno: " + err }));
 });
 
 // PROFESSOR POST
@@ -32,7 +35,7 @@ app.post('/professor', (req, res) => {
     const params = [req.body.nome, req.body.descricao];
 
     conexao.promise().query(sql, params)
-        .then(data => res.status(200).json({ message: "Professor inserido com sucesso", pessoa: data[0] }))
+        .then(data => res.status(200).json({ message: "Professor inserido com sucesso", element: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao inserir professor: " + err }));
 });
 
@@ -50,7 +53,7 @@ app.post('/atividade', (req, res) => {
     ];
 
     conexao.promise().query(sql, params)
-        .then(data => res.status(200).json({ message: "Atividade inserida com sucesso", pessoa: data[0] }))
+        .then(data => res.status(200).json({ message: "Atividade inserida com sucesso", element: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao inserir atividade: " + err }));
 });
 
@@ -61,7 +64,7 @@ app.post('/curso', (req, res) => {
     const params = [req.body.nome, req.body.total_periodos];
 
     conexao.promise().query(sql, params)
-        .then(data => res.status(200).json({ message: "Curso inserido com sucesso", pessoa: data[0] }))
+        .then(data => res.status(200).json({ message: "Curso inserido com sucesso", element: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao inserir curso: " + err }));
 });
 
@@ -72,7 +75,7 @@ app.post('/matricula', (req, res) => {
     const params = [req.body.fk_Aluno_id, req.body.fk_Curso_id, req.body.data];
 
     conexao.promise().query(sql, params)
-        .then(data => res.status(200).json({ message: "Matricula inserida com sucesso", pessoa: data[0] }))
+        .then(data => res.status(200).json({ message: "Matricula inserida com sucesso", element: data[0] }))
         .catch(err => res.status(500).json({ message: "Erro ao inserir Matricula: " + err }));
 });
 
