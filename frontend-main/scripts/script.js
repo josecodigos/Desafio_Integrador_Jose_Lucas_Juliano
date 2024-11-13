@@ -62,7 +62,6 @@ $('.datepicker').pickadate({
   });
 
 
-
 // open
 //picker.open();
 

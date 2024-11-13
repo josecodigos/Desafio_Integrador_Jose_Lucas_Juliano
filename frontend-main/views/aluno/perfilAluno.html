@@ -23,31 +23,31 @@
     </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Memorial</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Sobre
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#campo">Campo Real</a></li>
-                        <li><a class="dropdown-item" href="#curso">Curso</a></li>
-                        <li><a class="dropdown-item" href="#site">Site</a></li>
-                    </ul>
-                </li>                
-            </ul>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/frontend-main/views/index.html">Memorial</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Sobre
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#campo">Campo Real</a></li>
+                            <li><a class="dropdown-item" href="#curso">Curso</a></li>
+                            <li><a class="dropdown-item" href="#site">Site</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 <br>
     <div class="row align-items-start linha">
         <div class="col-md-3"></div>
@@ -55,7 +55,7 @@
             <legend style="text-align: center;">Perfil</legend>
         <form class="form-cad-pessoas form-control bg-light" action="">
             <label for="curso" class="form-label">Aluno:</label>
-            <select id="pegaAluno" data-js="idPegaAluno">
+            <select id="pegaAluno">
 
             </select>
             <table width="100%">
@@ -67,7 +67,7 @@
             </table>
         <div class="mb-3 d-flex justify-content-center">
             <button type="button" class="btn btn-primary btn-salvar">Editar perfil</button>
-            <button type="button" class="btn btn-primary btn-cancelar">Ver atividades</button>
+            <button type="button" class="btn btn-primary btn-cancelar" onclick="irPara('/frontend-main/views/atividades/verAtividades.html')">Ver atividades</button>
         </div>
         </form>
     </fieldset>
@@ -76,21 +76,50 @@
 <br>
 
 <script>
+        const carregarListaAlunos = () => {
+            fetch('http://localhost:5000/aluno')
+            .then(data =>  data.json())
+            .then(data => {
+                console.log(data)
+                const html = data.pessoa.reduce((acumulador, item) => {
+                    acumulador += `<option value="${item.id}">"${item.nome}"</option>`;
+                    return acumulador
+                }, '')
+                document.getElementById("pegaAluno").innerHTML = 
+                `<select id="pegaAluno"></select>` + 
+                html;
+            })
+            .catch(err => console.log(err))
+        }
+        carregarListaAlunos()
 
 
     const carregarDadosAluno = async (alunoId) => {
-        const alunoId = await document.getElementById(pegaAluno.value);
         fetch(`http://localhost:5000/aluno/${alunoId}`)
             .then(response => response.json())
             .then(data => {
                 const aluno = data.pessoa[0];
                 const html = `
-                    <tr><td><strong>Nome:</strong></td><td>${aluno.nome}</td></tr>
-                    <tr><td><strong>Email:</strong></td><td>${aluno.email}</td></tr>
-                    <tr><td><strong>Data de Nascimento:</strong></td><td>${aluno.data_nascimento}</td></tr>
-                    <tr><td><strong>Usuário do GitHub:</strong></td><td>${aluno.usuarioGitHub}</td></tr>
-                    <tr><td><strong>Descrição:</strong></td><td>${aluno.descricao}</td></tr>
-                `;
+                    <tr>
+                        <td><strong>Nome:</strong></td>
+                        <td>"${aluno.nome}"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email:</strong></td>
+                        <td>"${aluno.email}"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Data de Nascimento:</strong></td>
+                        <td>"${aluno.data_nascimento}"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Usuário do GitHub:</strong></td>
+                        <td>"${aluno.usuarioGitHub}"</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Descrição:</strong></td>
+                        <td>"${aluno.descricao}"</td>
+                    </tr>`;
                 document.querySelector('#tabelaAluno tbody').innerHTML = html;
             })
             .catch(error => {
@@ -98,6 +127,8 @@
             });
     }
     carregarDadosAluno();
+
+    const irPara = (pagina) => window.location.href = pagina;
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

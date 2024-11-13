@@ -22,46 +22,43 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Memorial</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-            aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        Sobre
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#campo">Campo Real</a></li>
-                        <li><a class="dropdown-item" href="#curso">Curso</a></li>
-                        <li><a class="dropdown-item" href="#site">Site</a></li>
-                    </ul>
-                </li>                
-            </ul>
+    <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/frontend-main/views/index.html">Memorial</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Sobre
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#campo">Campo Real</a></li>
+                            <li><a class="dropdown-item" href="#curso">Curso</a></li>
+                            <li><a class="dropdown-item" href="#site">Site</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 <br>
     <div class="row align-items-start linha">
         <div class="col-md-3"></div>
         <fieldset class="col-md-6">
             <legend style="text-align: center;">Atividades</legend>
         <form class="form-cad-pessoas form-control bg-light" id="formAtividade">
-            <label for="aluno" class="form-label">Aluno:</label>
-            <select id="pegaAluno">
-            </select>
             <table width="100%" data-js="tabelaAtividades">
 
-        </table>
+            </table>
+        <br>
         <div class="mb-3 d-flex justify-content-center">
-            <button type="button" class="btn btn-primary btn-salvar">Editar perfil</button>
-            <button type="button" class="btn btn-primary btn-cancelar">Ver atividades</button>
+            <button type="button" class="btn btn-primary btn-salvar" onclick="irPara('adicionarAtividade.html')">Adicionar atividade</button>
         </div>
         </form>
     </fieldset>
@@ -75,19 +72,12 @@
             event.preventDefault();
     });
 
-    const carregarAtividadesAluno = () => {
+    const carregarAtividades = () => {
         fetch(`http://localhost:5000/atividade`)
             .then(response => response.json())
             .then(data => {
                 const html = data.element.reduce((acumulador, item) => {
                     acumulador += `
-                        <tr>
-                            <th>Título:</th>
-                            <th>Data:</th>
-                            <th>Descrição:</th>
-                            <th>Aluno:</th>
-                            <th>Professor:</th>
-                        </tr>
                         <tr>
                             <td>${item.titulo}</td>
                             <td>${item.data}</td>
@@ -102,11 +92,19 @@
                 }, '');
 
                 const tabelaAtividades = document.querySelector("[data-js='tabelaAtividades']");
-                tabelaAtividades.innerHTML = html;
+                tabelaAtividades.innerHTML = `<tr>
+                                                <th>Título:</th>
+                                                <th>Data:</th>
+                                                <th>Descrição:</th>
+                                                <th>Aluno:</th>
+                                                <th>Professor:</th>
+                                            </tr>`+ html;
             })
             .catch(err => console.log("Erro ao buscar atividades do aluno:", err));
         }
-    carregarAtividadesAluno();
+    carregarAtividades();
+
+    const irPara = (pagina) => window.location.href = pagina;
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

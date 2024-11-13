@@ -8,26 +8,26 @@
     <title>Cadastro de projetos</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="../style/style_projetos.css">
+    <link rel="stylesheet" href="/frontend-main/style/style_projetos.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="../scripts/script_projetos.js"></script>
     <!-- Core -->
-<script src="../scripts/datas/lib/picker.js"></script>
+<script src="/frontend-main/scripts/datas/lib/picker.js"></script>
 <!-- Date Picker -->
-<script src="../scripts/datas/lib/picker.date.js"></script>
+<script src="/frontend-main/scripts/datas/lib/picker.date.js"></script>
 <!-- Language -->
-<script src="../scripts/datas/lib/translations/pt_BR.js"></script>
+<script src="/frontend-main/scripts/datas/lib/translations/pt_BR.js"></script>
 <!-- Required For Legacy Browsers (IE 8-) -->
-<script src="../scripts/datas/lib/legacy.js"></script>
+<script src="/frontend-main/scripts/datas/lib/legacy.js"></script>
 <!-- Escolher tema para input -->
-<link rel="stylesheet" href="../scripts/datas/lib/themes/default.css">
-<link rel="stylesheet" href="../scripts/datas/lib/themes/default.date.css">
+<link rel="stylesheet" href="/frontend-main/scripts/datas/lib/themes/default.css">
+<link rel="stylesheet" href="/frontend-main/scripts/datas/lib/themes/default.date.css">
+<script src="/frontend-main/scripts/script.js"></script>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Memorial</a>
+            <a class="navbar-brand" href="/frontend-main/views/index.html">Memorial</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -55,14 +55,14 @@
         <div class="col-md-3"></div>
         <fieldset class="col-md-6">
             <legend style="text-align: center;">Cadastro de atividade</legend>
-            <form class="form-cad-pessoas form-control bg-light" action="">
+            <form class="form-cad-pessoas form-control bg-light" id="atividadeForm">
                 <div class="mb-3">
-                    <label for="aluno" class="form-label">Aluno responsável:</label>
-                    <input type="text" id="aluno" name="aluno" class="form-control">
+                    <label for="Aluno" class="form-label">Id do aluno responsável:</label>
+                    <input type="text" id="idAluno" name="idAluno" class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="professor" class="form-label">Professor responsável:</label>
-                    <input type="text" id="professor" name="professor" class="form-control">
+                    <label for="professor" class="form-label">Id do professor responsável:</label>
+                    <input type="text" id="idProfessor" name="idProfessor" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Título:</label>
@@ -70,15 +70,16 @@
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Data:</label>
-                    <input id="exampleDate" class="datepicker form-control" name="date" type="date"/>
+                    <input id="data" class="datepicker form-control" name="date" type="date"/>
                 </div>
                 <div class="mb-3">
                     <label for="descricao" class="form-label">Descrição:</label>
                     <textarea id="descricao" cols="30" rows="6" name="descricao" class="form-control"></textarea>
                 </div>
                 <div class="mb-3">
-                    <button type="button" class="btn btn-primary btn-salvar" id="submitAtividade">Salvar</button>
-                    <button type="button" class="btn btn-primary btn-cancelar">Cancelar</button>
+                    <input type="submit" value="Salvar" id="postSubmitAtividade" class="btn-primary btn-salvar btn">
+                    <button type="button" class="btn btn-primary btn-cancelar"
+                    onclick="irPara('verAtividades.html')">Cancelar</button>
                 </div>
             </form>
         </fieldset>
@@ -88,43 +89,20 @@
 <br>
 
 <script>
-    document.getElementById('submitAtividade').addEventListener('click', function () {
-        const aluno = document.getElementById('aluno').value;
-        const professor = document.getElementById('professor').value;
-        const curso = document.getElementById('curso').value;
-        const materia = document.getElementById('materia').value;
-        const titulo = document.getElementById('titulo').value;
-        const descricao = document.getElementById('descricao').value;
-        const dataAtv = document.getElementById('exampleDate').value;
-
-        // Envia os dados para a API via POST
-        fetch('http://localhost:5000/atividade', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                titulo: titulo,
-                dataAtv: dataAtv,
-                descricao: descricao,
-                idAluno: aluno,
-                idProfessor: professor
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.message === "Atividade inserida com sucesso") {
-                alert('Atividade cadastrada com sucesso!');
-                document.getElementById('atividadeForm').reset();
-            } else {
-                alert('Erro ao cadastrar atividade');
-            }
-        })
-        .catch(err => {
-            console.error('Erro ao enviar os dados:', err);
-            alert('Erro ao cadastrar atividade');
+        const formAtividade = document.getElementById('atividadeForm');
+        formAtividade.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            const formDataAtividade = new FormData(formAtividade).entries()
+            const response = await fetch('http://localhost:5000/atividade', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(Object.fromEntries(formDataAtividade))
+            });
+            const result = await response.json();
+            console.log(result)
+            irPara("verAtividades.html")
         });
-    });
+        const irPara = (pagina) => window.location.href = pagina;
 </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
