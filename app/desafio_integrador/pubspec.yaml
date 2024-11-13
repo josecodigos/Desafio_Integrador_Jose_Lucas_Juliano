@@ -1,0 +1,24 @@
+name: desafio_integrador
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  http: ^1.2.2
+  path: ^1.9.0
+  provider: ^6.1.2
+  sqflite: ^2.4.1
+  sqflite_common_ffi: ^2.3.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+
+flutter:
+  uses-material-design: true
