@@ -95,7 +95,7 @@
                     <textarea id="descricao" cols="30" rows="6" name="descricao" class="form-control"></textarea>
                 </div>
                 <div class="mb-3">
-                    <button type="button" class="btn btn-primary btn-salvar">Salvar</button>
+                    <button type="button" class="btn btn-primary btn-salvar" id="submitAtividade">Salvar</button>
                     <button type="button" class="btn btn-primary btn-cancelar">Cancelar</button>
                 </div>
             </form>
@@ -104,6 +104,49 @@
     </div>
 
 <br>
+
+<script>
+    document.getElementById('submitAtividade').addEventListener('click', function () {
+        const aluno = document.getElementById('aluno').value;
+        const professor = document.getElementById('professor').value;
+        const curso = document.getElementById('curso').value;
+        const materia = document.getElementById('materia').value;
+        const titulo = document.getElementById('titulo').value;
+        const descricao = document.getElementById('descricao').value;
+        const dataAtv = document.getElementById('exampleDate').value;
+
+        // Envia os dados para a API via POST
+        fetch('http://localhost:5000/atividade', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                titulo: titulo,
+                dataAtv: dataAtv,
+                descricao: descricao,
+                papel: 'Responsável',  // Aqui você pode modificar conforme a lógica
+                idAluno: aluno,
+                idProfessor: professor
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.message === "Atividade inserida com sucesso") {
+                alert('Atividade cadastrada com sucesso!');
+                // Redirecionar ou resetar o formulário
+                document.getElementById('atividadeForm').reset();
+            } else {
+                alert('Erro ao cadastrar atividade');
+            }
+        })
+        .catch(err => {
+            console.error('Erro ao enviar os dados:', err);
+            alert('Erro ao cadastrar atividade');
+        });
+    });
+</script>
+
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
