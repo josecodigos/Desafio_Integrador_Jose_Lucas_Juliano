@@ -84,3 +84,20 @@ CREATE PROCEDURE adicionar_aluno (
 	END $$
 
 DELIMITER ;
+
+VIEW `aluno_atividade_professor` AS
+    SELECT 
+        `aluno`.`id` AS `idAluno`,
+        `aluno`.`nome` AS `alunoNome`,
+        `atividade`.`id` AS `idAtividade`,
+        `atividade`.`titulo` AS `titulo`,
+        `atividade`.`descricao` AS `descricao_atividade`,
+        `atividade`.`data` AS `data`,
+        `professor`.`id` AS `idProfessor`,
+        `professor`.`nome` AS `profNome`
+    FROM
+        ((((`aluno`
+        JOIN `aluno_atividade` ON ((`aluno`.`id` = `aluno_atividade`.`fk_Aluno_id`)))
+        JOIN `atividade` ON ((`aluno_atividade`.`fk_Atividade_id` = `atividade`.`id`)))
+        JOIN `professor_atividade` ON ((`atividade`.`id` = `professor_atividade`.`fk_Atividade_id`)))
+        JOIN `professor` ON ((`professor_atividade`.`fk_Professor_id` = `professor`.`id`)));
