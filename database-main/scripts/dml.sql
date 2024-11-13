@@ -85,7 +85,7 @@ CREATE PROCEDURE adicionar_aluno (
 
 DELIMITER ;
 
-VIEW `aluno_atividade_professor` AS
+CREATE VIEW `aluno_atividade_professor` AS
     SELECT 
         `aluno`.`id` AS `idAluno`,
         `aluno`.`nome` AS `alunoNome`,

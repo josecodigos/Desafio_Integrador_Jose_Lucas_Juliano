@@ -64,31 +64,13 @@
                     <label for="professor" class="form-label">Professor responsável:</label>
                     <input type="text" id="professor" name="professor" class="form-control">
                 </div>
-                <div class="mb-3 row">
-                    <div class="col-auto">
-                        <label for="curso" class="form-label">Curso:</label>
-                        <select id="curso">
-                            <option value="ex1">Exemplo de curso 1</option>
-                            <option value="ex2">Exemplo de curso 2</option>
-                            <option value="ex3">Exemplo de curso 3</option>
-                        </select>
-                    </div>
-                    <div class="col-auto">
-                        <label for="materia" class="form-label">Matéria:</label>
-                        <select id="materia">
-                            <option value="ex1">Exemplo de matéria 1</option>
-                            <option value="ex2">Exemplo de matéria 2</option>
-                            <option value="ex3">Exemplo de matéria 3</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="mb-3">
                     <label for="titulo" class="form-label">Título:</label>
                     <input type="text" id="titulo" name="titulo" class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="date" class="form-label">Data:</label>
-                    <input id="exampleDate" class="datepicker form-control" name="date" type="text"/>
+                    <input id="exampleDate" class="datepicker form-control" name="date" type="date"/>
                 </div>
                 <div class="mb-3">
                     <label for="descricao" class="form-label">Descrição:</label>
@@ -125,7 +107,6 @@
                 titulo: titulo,
                 dataAtv: dataAtv,
                 descricao: descricao,
-                papel: 'Responsável',  // Aqui você pode modificar conforme a lógica
                 idAluno: aluno,
                 idProfessor: professor
             })
@@ -134,7 +115,6 @@
         .then(data => {
             if (data.message === "Atividade inserida com sucesso") {
                 alert('Atividade cadastrada com sucesso!');
-                // Redirecionar ou resetar o formulário
                 document.getElementById('atividadeForm').reset();
             } else {
                 alert('Erro ao cadastrar atividade');
