@@ -118,6 +118,41 @@ class ApiService {
     }
   }
   
+    Future<bool> createAtividade(Atividade atividade) async {
+    final endpoint = '/atividade';
+    try {
+      final url = Uri.parse('$baseUrl$endpoint');
+      final requestBody = jsonEncode(atividade.toJson());
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: requestBody,
+      );
+
+      print("JSON enviado para a API: $requestBody");
+      
+      String status = response.statusCode == 200 ? 'Success' : 'Failure';
+
+      await logRequest(endpoint, 'POST', status, requestBody);
+
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print('Failed to create atividade. Status code: ${response.statusCode}');
+        return false;
+      }
+    } catch (e) {
+      print('Error creating atividade: $e');
+      
+      await logRequest(endpoint, 'POST', 'Error', e.toString());
+
+      return false;
+    }
+  }
+
+
   Future<List<Curso>> fetchCurso() async {
     final String endpoint = '/curso';
     try {

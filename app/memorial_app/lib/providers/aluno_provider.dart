@@ -20,13 +20,5 @@ class AlunoProvider with ChangeNotifier {
     }
   }
 
-/*   Future<void> addAluno(Aluno aluno) async {
-    try {
-      await apiService.createAluno(aluno);
-      alunos.add(aluno);
-      notifyListeners();
-    } catch (e) {
-      print('Error adding aluno: $e');
-    }
-  } */
+
 }

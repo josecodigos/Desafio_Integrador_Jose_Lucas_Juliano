@@ -1,4 +1,3 @@
-// lib/screens/aluno_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/professor_provider.dart';
@@ -32,14 +31,6 @@ class ProfessorScreen extends StatelessWidget {
                     },
                   ),
           ),
-          /* ElevatedButton(
-            onPressed: () {
-              alunoProvider.addAluno(
-                Aluno(id: 0, nome: 'José Antonio',email:'joseamandrade466@gmail.com', dataNascimento: DateTime.parse("2004-08-22"), usuarioGitHub: 'josecodigos', descricao: 'José', senha: '1234'),
-              );
-            },
-            child: Text('Add Aluno'),
-          ), */
         ],
       ),
     );

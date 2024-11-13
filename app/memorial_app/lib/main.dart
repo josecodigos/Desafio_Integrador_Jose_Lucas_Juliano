@@ -2,7 +2,6 @@ import 'dart:io';
 import '/screens/homeScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sqflite/sqflite.dart'; 
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 import 'providers/aluno_provider.dart';

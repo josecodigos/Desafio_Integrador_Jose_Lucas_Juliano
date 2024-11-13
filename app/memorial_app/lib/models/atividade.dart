@@ -3,15 +3,19 @@ class Atividade {
   final String? titulo;
   final String? descricao;
   final DateTime? dataAtividade;
+  final int? idAluno;
   final String? nomeAluno;
+  final int? idProfessor;
   final String? nomeProfessor;
 
   Atividade({
-    required this.id, 
+    this.id, 
     this.titulo, 
     this.descricao, 
     this.dataAtividade, 
-    this.nomeAluno, 
+    this.idAluno, 
+    this.nomeAluno,
+    this.idProfessor,
     this.nomeProfessor});
 
   factory Atividade.fromJson(Map<String, dynamic> json) {
@@ -28,8 +32,10 @@ class Atividade {
       titulo: json['titulo'],
       descricao: json['descricao_atividade'],
       dataAtividade: parsedDate,
-      nomeAluno: json['alunoNome'],
-      nomeProfessor: json['ProfessorNome']
+      idAluno: json['idAluno'],
+      nomeAluno: json['nomeAluno'],
+      idProfessor: json['idProfessor'],
+      nomeProfessor: json['nomeProfessor']
     );
   }
 
@@ -37,8 +43,10 @@ class Atividade {
     return {
       'titulo': titulo,
       'descricao': descricao,
-      'dataAtividade': dataAtividade,
+      'dataAtividade': dataAtividade?.toIso8601String(),
+      'idAluno': idAluno,
       'nomeAluno': nomeAluno,
+      'idProfessor': idProfessor,
       'nomeProfessor': nomeProfessor
     };
   }

@@ -1,4 +1,3 @@
-// lib/screens/aluno_screen.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/aluno_provider.dart';
@@ -17,13 +16,13 @@ class AlunoScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              ElevatedButton(
+              ElevatedButton( //Botao pra carregar alunos
                 onPressed: () {
                   alunoProvider.fetchAlunos();
                 },
                 child: Text('Load Alunos'),
               ),
-              ElevatedButton(
+              ElevatedButton( //Botao pra adicionar alunos
                 onPressed: () {
                   _showAddAlunoForm(context);
                   alunoProvider.fetchAlunos();
@@ -32,7 +31,7 @@ class AlunoScreen extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(
+          Expanded( //faz um circulo de carregamento e cria a lista de alunos
             child: alunoProvider.isLoading
                 ? CircularProgressIndicator()
                 : ListView.builder(

@@ -9,14 +9,14 @@ class CursoScreen extends StatelessWidget {
     final cursoProvider = Provider.of<CursoProvider>(context);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Alunos')),
+      appBar: AppBar(title: Text('Cursos')),
       body: Column(
         children: [
           ElevatedButton(
             onPressed: () {
               cursoProvider.fetchCurso();
             },
-            child: Text('Load Alunos'),
+            child: Text('Load Cursos'),
           ),
           Expanded(
             child: cursoProvider.isLoading
@@ -32,14 +32,6 @@ class CursoScreen extends StatelessWidget {
                     },
                   ),
           ),
-          /* ElevatedButton(
-            onPressed: () {
-              alunoProvider.addAluno(
-                Aluno(id: 0, nome: 'José Antonio',email:'joseamandrade466@gmail.com', dataNascimento: DateTime.parse("2004-08-22"), usuarioGitHub: 'josecodigos', descricao: 'José', senha: '1234'),
-              );
-            },
-            child: Text('Add Aluno'),
-          ), */
         ],
       ),
     );
